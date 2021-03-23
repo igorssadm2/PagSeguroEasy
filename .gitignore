@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/services/PagSeguroEasy.Library/.vs/PagSeguroEasy.Library/v16
+/src/services/.vs
+/src/services/PagSeguroEasy.Library/PagSeguroEasy.Library/obj
