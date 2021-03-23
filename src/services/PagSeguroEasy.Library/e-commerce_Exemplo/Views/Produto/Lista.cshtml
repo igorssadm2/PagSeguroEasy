@@ -1,0 +1,14 @@
+﻿@* model IEnumerable<msShop.Models.Produto> *@
+@model ListaProdutoViewModel
+@{
+    ViewData["Title"] = @Model.CategoriaAtual;
+}
+@**
+    *Partial View _produtoCard in
+    **@
+    <div class="container">
+        @foreach (var produto in Model.Produtos)
+        {
+            <partial name="_produtoCard" model="produto" />
+        }
+    </div>

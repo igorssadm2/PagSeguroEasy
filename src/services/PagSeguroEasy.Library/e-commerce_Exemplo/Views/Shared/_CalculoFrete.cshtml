@@ -1,0 +1,48 @@
+﻿
+@model ValorPrazoFreteModel
+
+<div class="row">
+    <h1 class="border">Frete</h1>
+    <div class="body">
+        <div class="container-frete">
+            <form id="Form-Botao">
+                <div class="inline-input">
+                    <input id="cepFrete" data-placeholder="Informe o CEP" type="text" />
+                    <button id="btnCalcular" class="le-button btn-continuar" onclick="CalcularFrete()" type="button">Calcular</button>
+                </div>
+            </form>
+            <form id="Form-entrega" style="display: none";>
+                <p>Selecione o metodo de entrega:</p>
+
+                <input type="radio" id="Radio-PAC" name="Radio-Entrega" value="PAC" onclick="OpcaoEntrega()">
+                <label for="PAC">PAC </label>
+                <label id="Valor-Pac" for="PAC"> @Model.ListaValorPrazoFrete[0].Valor.ToString("c") - </label>
+                <label id="Prazo-Pac" for="PAC">@Model.ListaValorPrazoFrete[0].Prazo.ToString() dias úteis</label><br>
+
+                <input type="radio" id="Radio-SEDEX" name="Radio-Entrega" value="SEDEX" onclick="OpcaoEntrega()">
+                <label for="SEDEX">SEDEX</label>
+                <label id="Valor-Sedex" for="SEDEX"> @Model.ListaValorPrazoFrete[1].Valor.ToString("c") - </label>
+                <label id="Prazo-Sedex" for="SEDEX"> @Model.ListaValorPrazoFrete[1].Prazo.ToString() dias úteis</label><br>
+            </form>
+        </div>
+    </div>
+</div><br>
+<div class="widget cart-summary">
+    <div class="body">
+        <ul id="total-price" class="tabled-data inverse-bold no-border">
+            <li>
+                <label>Valor Total</label>
+                <div class="value pull-right">
+                    <label id="LabelTotal"></label>
+                    <label id="LabelTotalPac" style="display: none;">@Model.ListaValorPrazoFrete[0].SomaTotal.ToString("c")</label>
+                    <label id="LabelTotalSedex" style="display: none;">@Model.ListaValorPrazoFrete[1].SomaTotal.ToString("c")</label>
+                </div>
+            </li>
+        </ul>
+        <div class="buttons-holder">
+            <a class="le-button big" asp-controller="Pedido" asp-action="Checkout" id="btnCheckout" >Checkout</a>
+        </div>
+    </div>
+</div><!-- /.widget -->
+
+

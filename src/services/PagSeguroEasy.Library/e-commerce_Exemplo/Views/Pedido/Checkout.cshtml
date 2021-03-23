@@ -1,0 +1,259 @@
+﻿@model PedidoVieoModel
+
+<section id="checkout-page">
+    <div class="container">
+        <div class="col-xs-12 no-margin">
+
+            <div class="billing-address">
+                <h2 class="border h1">Informações sobre a entrega</h2>
+                <form asp-action="Checkout" method="post" role="form">
+                    <div>
+                        <input type="radio" name="Radio-Endereco" value="meu-endereco" onchange="OpcaoEndereco()" checked="checked" />
+                        <label>Meu Endereço</label>
+                    </div>
+                    <div id="Endereco-Padrao">
+                        <div asp-validation-summary="All" class="danger"></div>
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Nome"></label>
+                            <input asp-for="DadosUsuario.Nome" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Nome"></span>
+
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.CPFCNPJ"></label>
+                            <input asp-for="DadosUsuario.CPFCNPJ" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.CPFCNPJ"></span>
+                        </div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.CEP"></label>
+                            <input id="meu-cep" asp-for="DadosUsuario.CEP" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.CEP"></span>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Enderenco"></label>
+                            <input asp-for="DadosUsuario.Enderenco" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Enderenco"></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Numero"></label>
+                            <input asp-for="DadosUsuario.Numero" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Numero"></span>
+                        </div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <div class="col-lg-1">
+                            <label asp-for="DadosUsuario.Estado"></label>
+                            <input asp-for="DadosUsuario.Estado" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Estado"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.Cidade"></label>
+                            <input asp-for="DadosUsuario.Cidade" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Cidade"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.Bairro"></label>
+                            <input asp-for="DadosUsuario.Bairro" class="le-input" disabled />
+                            <span asp-validation-for="DadosUsuario.Bairro"></span>
+                        </div>
+                        <div class="row"></div>
+                    </div><br><br>
+                    <div>
+                        <input type="radio" name="Radio-Endereco" value="outro-endereco" onchange="OpcaoEndereco()" />
+                        <label>Outro Endereço</label>
+                    </div>
+                    <div id="Outro-Endereco" style="display:none">
+                        <div asp-validation-summary="All" class="danger"></div>
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Nome"></label>
+                            <input id="nome" asp-for="DadosUsuario.Nome" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Nome"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.CPFCNPJ"></label>
+                            <input id="cpf" asp-for="DadosUsuario.CPFCNPJ" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.CPFCNPJ"></span>
+                        </div>
+                        <div class="row"></div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.CEP"></label>
+                            <input id="outro-cep" asp-for="DadosUsuario.CEP" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.CEP"></span>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Enderenco"></label>
+                            <input id="rua" asp-for="DadosUsuario.Enderenco" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Enderenco"></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <label asp-for="DadosUsuario.Numero"></label>
+                            <input id="numero" asp-for="DadosUsuario.Numero" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Numero"></span>
+                        </div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                        <div class="col-lg-1">
+                            <label asp-for="DadosUsuario.Estado"></label>
+                            <input id="uf" asp-for="DadosUsuario.Estado" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Estado"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.Cidade"></label>
+                            <input id="cidade" asp-for="DadosUsuario.Cidade" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Cidade"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="DadosUsuario.Bairro"></label>
+                            <input id="bairro" asp-for="DadosUsuario.Bairro" class="le-input" />
+                            <span asp-validation-for="DadosUsuario.Bairro"></span>
+                        </div>
+                        <div class="row"></div>
+                        <div class="row"></div>
+                    </div>
+                    <div id="CalculoEntrega">
+                    </div>
+                    <div class="place-order-button">
+                        <input id="ContinuarCheckout" asp-controller="Pedido" asp-action="CheckoutPag" type="submit" class="le-button big" value="Continuar para Pagamento" />
+                    </div><!-- /.field-row -->
+                </form>
+            </div><!-- /.billing-address -->
+        </div><!-- /.col -->
+    </div><!-- /.container -->
+</section><!-- /#checkout-page -->
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            limpa_formulário_cep()
+            ValorEntrega()
+
+        });
+
+        function OpcaoEndereco() {
+
+            var value = $("input:radio[name=Radio-Endereco]:checked").val();
+
+            if (value == 'meu-endereco') {
+                $('#Outro-Endereco').hide();
+                $('#Endereco-Padrao').show();
+            }
+
+            if (value == 'outro-endereco') {
+                $('#Endereco-Padrao').hide();
+                $('#Outro-Endereco').show();
+                limpa_formulário_cep()
+            }
+            ValorEntrega()
+
+        }
+
+        function limpa_formulário_cep() {
+            $("#rua").val("");
+            $("#bairro").val("");
+            $("#cidade").val("");
+            $("#uf").val("");
+            $("#outro-cep").val("");
+            $("#numero").val("");
+        }
+
+        $("#outro-cep").blur(function () {
+
+            var cep = $(this).val().replace(/\D/g, '');
+
+            if (cep != "") {
+
+                var validacep = /^[0-9]{8}$/;
+
+                if (validacep.test(cep)) {
+
+                    $("#rua").val("...");
+                    $("#bairro").val("...");
+                    $("#cidade").val("...");
+                    $("#uf").val("...");
+
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                        if (!("erro" in dados)) {
+
+                            $("#rua").val(dados.logradouro);
+                            $("#bairro").val(dados.bairro);
+                            $("#cidade").val(dados.localidade);
+                            $("#uf").val(dados.uf);
+                            ValorEntrega()
+
+                        }
+                        else {
+
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                }
+                else {
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            }
+            else {
+                limpa_formulário_cep();
+            }
+        });
+
+        function ValorEntrega() {
+            var op = $("input:radio[name=Radio-Endereco]:checked").val();
+            var cepFrete
+            $('#ContinuarCheckout').attr('disabled', 'disabled');
+
+            if (op == 'meu-endereco') {
+                cepFrete = $('#meu-cep').val()
+            }
+            else {
+                cepFrete = $('#outro-cep').val()
+            }
+
+            if (cepFrete != "") {
+                $.ajax({
+                    url: '@Url.Action("CalcularFrete", "Carrinho")',
+                    data: {
+                        CepDestino: cepFrete
+                    },
+                    type: 'GET',
+                    cache: false,
+                    async: true,
+                    success: function (data) {
+
+                        $("#CalculoEntrega").html(data);
+                        $('#Form-entrega').show();
+                        $('#cepFrete').hide();
+                        $('#btnCalcular').hide();
+                        $('#btnCheckout').hide();
+                    },
+                });
+            } else {
+                $('#Form-entrega').hide();
+                $('#LabelTotal').hide();
+            }
+        }
+
+        function OpcaoEntrega() {
+            var value = $("input:radio[name=Radio-Entrega]:checked").val();
+            var total;
+
+            if (value == 'PAC') {
+                total = $('#LabelTotalPac').text()
+            }
+            if (value == 'SEDEX') {
+                total = $('#LabelTotalSedex').text()
+            }
+            $('#LabelTotal').text(total)
+            $('#ContinuarCheckout').removeAttr('disabled');
+        }
+
+    </script>
+}

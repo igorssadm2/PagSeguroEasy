@@ -1,0 +1,32 @@
+﻿@model Produto
+
+
+                        <div class="col-sm-4 col-md-3 no-margin product-item-holder hover">
+                            <div class="product-item">
+                                <div class="ribbon red"><span>sale</span></div>
+                                <div class="image">
+                                    <a asp-controller="Produto" asp-action="Detalhes" asp-route-id="@Model.ProdutoId"><img alt="" src="~/imagens/produtos/@Model.ImagemThumbnailUrl" /></a>
+</div>
+                                <div class="body">
+                                    <div class="label-discount green">-50% sale</div>
+                                    <div class="title">
+                                        <a asp-controller="Produto" asp-action="Detalhes" asp-route-id="@Model.ProdutoId">@Model.Nome</a>
+                                    </div>
+                                    <div class="brand">@Model.Categoria.CategoriaNome</div>
+                                </div>
+                                <div class="prices">
+                                    <div class="price-prev"><strike>@Model.ValorBruto.ToString("c")</strike></div>
+                                    <div class="price-current pull-right">@Model.Preco.ToString("c")</div>
+                                </div>
+
+                                <div class="hover-area">
+                                    <div class="add-cart-button">
+                                        <a asp-controller="Produto" asp-action="Detalhes" asp-route-id="@Model.ProdutoId" class="le-button">Detalhes</a>
+                                    </div>
+                                    <div class="wish-compare">
+                                        <a class="btn-add-to-wishlist" href="#">add to wishlist</a>
+                                        <a class="btn-add-to-compare" href="#">compare</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
