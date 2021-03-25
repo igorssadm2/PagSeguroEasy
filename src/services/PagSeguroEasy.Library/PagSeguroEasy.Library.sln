@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PagSeguroEasy.Library", "PagSeguroEasy.Library\PagSeguroEasy.Library.csproj", "{C142B6CD-DF25-459E-9806-76E1B339DB37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "msShop", "e-commerce_Exemplo\msShop.csproj", "{ED57B1D0-3EAC-4E79-A606-34FEB1469ECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "msShop", "..\..\..\..\..\E-commerce\msShop.csproj", "{C4C6B1F5-8FCE-489B-9F7F-1639602B8699}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C142B6CD-DF25-459E-9806-76E1B339DB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C142B6CD-DF25-459E-9806-76E1B339DB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C142B6CD-DF25-459E-9806-76E1B339DB37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED57B1D0-3EAC-4E79-A606-34FEB1469ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED57B1D0-3EAC-4E79-A606-34FEB1469ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED57B1D0-3EAC-4E79-A606-34FEB1469ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED57B1D0-3EAC-4E79-A606-34FEB1469ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C6B1F5-8FCE-489B-9F7F-1639602B8699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C6B1F5-8FCE-489B-9F7F-1639602B8699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C6B1F5-8FCE-489B-9F7F-1639602B8699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C6B1F5-8FCE-489B-9F7F-1639602B8699}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
