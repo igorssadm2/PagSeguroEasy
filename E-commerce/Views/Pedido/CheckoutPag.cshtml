@@ -1,0 +1,174 @@
+﻿@model PedidoVieoModel
+
+
+<section id="pagamento-page">
+    <div class="container">
+        <div class="col-xs-12 no-margin">
+            <div class="billing-address">
+                <h2 class="border h1">Pagamento</h2>
+                <form asp-action="Pagamento" method="post" role="form">
+                    <div>
+                        <h4 class="mb-3">Método de pagamento</h4><br>
+                        <div class="custom-control custom-radio">
+                            <input id="credito" name="paymentMethod" type="radio" value="credito" checked="checked" class="custom-control-input" required="">
+                            <label class="custom-control-label" for="credito">Cartão de crédito</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="debito" name="paymentMethod" type="radio" value="debito" class="custom-control-input" required="">
+                            <label class="custom-control-label" for="debito">Cartão de débito</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="paypal" name="paymentMethod" type="radio" value="boleto" class="custom-control-input" required="">
+                            <label class="custom-control-label" for="boleto">Boleto</label>
+                        </div>
+                    </div>
+                    <div class="row h-25"></div><br>
+                    <div id="Cartao-Credito">
+                        <h4 class="mb-3">Dados de Cartao</h4><br>
+                        <div class="row"></div>
+                        <div class="col-lg-4">
+                            <label asp-for="CartaoCredito.NomeCartao"></label>
+                            <input asp-for="CartaoCredito.NomeCartao" class="le-input" />
+                            <span asp-validation-for="CartaoCredito.NomeCartao"></span>
+                        </div>             
+                        <div class="col-lg-4">
+                            <label asp-for="CartaoCredito.NumeroCartao"></label>
+                            <input id="NumeroCartao" asp-for="CartaoCredito.NumeroCartao" class="le-input" />                          
+                            <span asp-validation-for="CartaoCredito.NumeroCartao"></span>                     
+                        </div>
+                        <div><label></label><div id="Bandeira"></div></div><br>
+                        <div class="row"></div>
+                        <div class="col-lg-2">
+                            <label asp-for="CartaoCredito.DataValidade"></label>
+                            <input asp-for="CartaoCredito.DataValidade" class="date le-input form-control-lg" />
+                            <span asp-validation-for="CartaoCredito.DataValidade"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <label asp-for="CartaoCredito.CVV"></label>
+                            <input asp-for="CartaoCredito.CVV" class="le-input" />
+                            <span asp-validation-for="CartaoCredito.CVV"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>Número de parcelas</label>
+                            <select name="QtdParcelas" id="QtdParcelas" class="DisplayNone">
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                        <div id="CartaoCredito"></div>
+                        <div id="Boleto"></div>
+                        <div id="Debito"></div>
+                    </div>
+                    <div class="row"></div><br>
+                    <div class="place-order-button">
+                        <input id="FinalizarPedido" asp-controller="Pedido" asp-action="Pagamento" type="submit" class="le-button big" value="Finalizar Pedido" disabled />
+                    </div><!-- /.field-row -->
+                </form>
+            </div><!-- /.billing-address -->
+        </div><!-- /.col -->
+    </div><!-- /.container -->
+</section><!-- /#checkout-page -->
+
+@section Scripts {
+    <script type="text/javascript">
+
+        var valId;
+        var total = 1235.99;
+
+        $(document).ready(function () {
+            IniciarSessao();
+            setTimeout(MeiosPagamento, 10000);
+
+            $('input:radio[name=paymentMethod]').change(function () {
+
+                if (this.value == "credito") {
+                    $('#Cartao-Credito').show();
+                }
+                if (this.value == "debito" || this.value == "boleto") {
+                    $('#Cartao-Credito').hide();
+                }
+            })
+
+            $('#NumeroCartao').on('keyup', function () {
+
+                var NumCartao = $(this).val();
+                var QtdCaracteres = NumCartao.length;
+
+                if (QtdCaracteres == 6) {
+                    $.ajax({
+                        url: "/api/Pagamento/obterbandeiracartao",
+                        data: {
+                            IdSessao: valId,
+                            BinCartao: NumCartao
+                        },
+                        type: 'GET',
+                        success: function (response) {
+                            var BandeiraImg = response.bin.brand.name;
+                            $('#Bandeira').html("<img src=https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/" + BandeiraImg + ".png>");
+                            Parcelas(BandeiraImg);
+                        },
+                    });
+                }
+            })
+        });
+
+        function IniciarSessao() {
+
+            var valemail = 'sasa_c_@@hotmail.com';
+            var valtoken = 'D5C553056C7F40DB9A0F5586139226EB';
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Pagamento/CriarSessao",
+                data: {
+                    Email: valemail,
+                    Token: valtoken
+                },
+                success: function (response) {
+                    valId = response.id;
+                    console.log(valId);
+                },
+            });
+        }
+
+        function MeiosPagamento() {
+            $.ajax({
+                type: "GET",
+                url: "/api/Pagamento/ObterMeiosdePagamento",
+                data: {
+                    valor: total,
+                    IdSessao: valId
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+            });
+        }
+
+        function Parcelas(Bandeira) {
+            $.ajax({
+                type: "GET",
+                url: "/api/Pagamento/obtercondicoesparcelamento",
+                data: {
+                    valor: total,
+                    IdSessao: valId,
+                    creditCardBrand: Bandeira
+                },
+                success: function (response) {
+                    console.log(response);
+
+                    $.each(response.root.installments, function (i, obj) {
+                        $.each(obj, function (i2, obj2) {
+                            var NumberValue = obj2.installmentAmount;
+                            var Number = "R$ " + NumberValue;
+
+                            $('#QtdParcelas').show().append("<option value='" + Number + "'>" + obj2.quantity + " parcelas de " + Number + "</option>");
+                        });
+                    });
+                },
+            });
+        }
+
+
+
+    </script>
+}

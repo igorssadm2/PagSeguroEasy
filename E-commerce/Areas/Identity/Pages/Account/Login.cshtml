@@ -1,0 +1,73 @@
+﻿@page
+@model LoginModel
+
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<!-- ========================================= MAIN ========================================= -->
+<main id="authentication" class="inner-bottom-md">
+    <div class="container">
+        <div class="row">
+
+                <div class="col-md-6">
+                    <section class="section sign-in inner-right-xs">
+                        <img src="~/imagens/login.jpg" alt="Default" />
+                    </section><!-- /.sign-in -->
+                </div><!-- /.col -->
+
+            <div class="col-md-6">
+                <section class="section sign-in inner-right-xs">
+                    <h2 class="bordered">Login Cliente</h2>
+                    <p>Faça Login para entrar na sua conta</p>
+                    <!--
+                <div class="social-auth-buttons">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn-block btn-lg btn btn-facebook"><i class="fa fa-facebook"></i> Sign In with Facebook</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn-block btn-lg btn btn-twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</button>
+                        </div>
+                    </div>
+                </div>
+            -->
+                    <form id="account" method="post" role="form" class="login-form cf-style-1">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="field-row">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="le-input form-control-lg" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="field-row">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="le-input form-control-lg" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div><!-- /.field-row -->
+
+                        <div class="field-row clearfix">
+                            <span class="pull-left">
+                                <label class="content-color" asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" class="le-checbox auto-width inline" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </span>
+                            <span class="pull-right">
+                                <a id="forgot-password" asp-page="./ForgotPassword" class="content-color bold">Forgot your password?</a>
+                            </span>
+                        </div>
+
+                        <div class="buttons-holder">
+                            <button type="submit" class="le-button huge btn-lg">Entrar</button>
+                        </div><!-- /.buttons-holder -->
+                    </form><!-- /.cf-style-1 -->
+
+                </section><!-- /.sign-in -->
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</main><!-- /.authentication -->
+<!-- ========================================= MAIN : END ========================================= -->

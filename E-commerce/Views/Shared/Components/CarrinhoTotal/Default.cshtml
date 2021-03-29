@@ -1,0 +1,6 @@
+﻿@model CarrinhoViewModel
+
+@if (Model.ShoppingCart.CarrinhoItens.Count > 0)
+{
+    @Model.SomaCarrinho.ToString("c")
+}

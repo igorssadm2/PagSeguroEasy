@@ -1,0 +1,129 @@
+﻿@model HomeViewModel
+
+<div id="top-banner-and-menu">
+    <div class="container">
+
+        <div class="col-xs-12 col-sm-4 col-md-3 sidemenu-holder">
+            <!-- ================================== TOP NAVIGATION ================================== -->
+            <div class="side-menu animate-dropdown">
+                <div class="head"><i class="fa fa-list"></i> Categorias</div>
+                <nav class="yamm megamenu-horizontal" role="navigation">
+                    <ul class="nav">
+                        @await Component.InvokeAsync("MenuCategoria")
+                    </ul><!-- /.nav -->
+                </nav><!-- /.megamenu-horizontal -->
+            </div><!-- /.side-menu -->
+            <!-- ================================== TOP NAVIGATION : END ================================== -->
+        </div><!-- /.sidemenu-holder -->
+        <div class="col-xs-12 col-sm-8 col-md-9 homebanner-holder">
+            <!-- ========================================== SECTION – HERO ========================================= -->
+            <div id="hero">
+                <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+
+                    <div class="item" style="background-image: url(imagens/sliders/slider01.jpg);">
+                        <div class="container-fluid">
+                            <div class="caption vertical-center text-left">
+                                <div class="big-text fadeInDown-1">
+                                    Xbox One S <span class="big"><span class="sign">R$</span>2.979,90</span>
+                                </div>
+
+                                <div class="excerpt fadeInDown-2">
+                                    Console Original Xbox One S 1TB<br>
+                                    Anthem Bundle<br>
+                                    leitor de Blu-ray e Resolução 4K
+                                </div>
+                                <div class="small fadeInDown-2">
+                                    Entrega Imediata
+                                </div>
+                                <div class="button-holder fadeInDown-3">
+                                    <a href="Produto/Detalhes/1" class="big le-button ">Comprar</a>
+                                </div>
+                            </div><!-- /.caption -->
+                        </div><!-- /.container-fluid -->
+                    </div><!-- /.item -->
+
+                    <div class="item" style="background-image: url(imagens/sliders/slider03.jpg);">
+                        <div class="container-fluid">
+                            <div class="caption vertical-center text-left">
+                                <div class="big-text fadeInDown-1">
+                                    Outlet<span class="big"><span class="sign">R$</span>39,90</span>
+                                </div>
+
+                                <div class="excerpt fadeInDown-2">
+                                    Jogos seminovos<br /> EM PROMOÇÃO <br>a partir de R$ 39,90.<br>
+                                </div>
+                                <div class="small fadeInDown-2">
+                                    Vários títulos
+                                </div>
+                                <div class="button-holder fadeInDown-3">
+                                    <a href="Produto/Lista?categoria=Jogos" class="big le-button ">Ver títulos</a>
+                                </div>
+                            </div><!-- /.caption -->
+                        </div><!-- /.container-fluid -->
+                    </div><!-- /.item -->
+
+                </div><!-- /.owl-carousel -->
+            </div>
+            <!-- ========================================= SECTION – HERO : END ========================================= -->
+        </div><!-- /.homebanner-holder -->
+    </div><!-- /.container -->
+</div>
+
+
+
+<section id="banner-holder" class="wow fadeInUp">
+    <div class="container">
+        <div class="col-xs-12 col-lg-6 no-margin banner">
+            <a href="#">
+                <div class="banner-text theblue">
+                    
+    <h1 style="color:white">Frete Grátis*</h1>
+    <span class="tagline" style="color:white">para zona sul de São Paulo<br /> em compras acima de R$ 250,00.</span>
+                </div>
+                <img class="banner-image" alt="" src="imagens/banners/banner-narrow-01.jpg" />
+            </a>
+        </div>
+        <div class="col-xs-12 col-lg-6 no-margin text-right banner">
+            <a href="#">
+                <div class="banner-text right">
+                    <h1 style="color:white">Formas de Pagamento</h1>
+                    <span class="tagline" style="color:white">Pague a vista ou em<br /> até 6x no cartão.</span>
+                </div>
+                <img class="banner-image" alt="" src="imagens/banners/banner-narrow-02.jpg" />
+            </a>
+        </div>
+    </div><!-- /.container -->
+</section>
+
+
+<div id="products-tab" class="wow fadeInUp">
+    <div class="container">
+        <div class="tab-holder">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#featured" data-toggle="tab">Categoria Nome</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="featured">
+                    <div class="product-grid-holder">
+
+                        @foreach (var produto in Model.aVenda)
+                        {
+                            <partial name="_produtoCard" model="produto" />
+                        }
+                    </div>
+                    <br />
+                    <div class="loadmore-holder text-center">
+                        <a class="btn-loadmore" href="#">
+                            <i class="fa fa-plus"></i>
+                            Carregar mais produtos
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

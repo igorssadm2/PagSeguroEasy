@@ -1,0 +1,61 @@
+﻿@page
+@model RegisterModel
+
+<main id="authentication" class="inner-bottom-md">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <section class="section sign-in inner-right-xs">
+                    <img src="~/imagens/login.jpg" alt="Default" />
+                </section><!-- /.sign-in -->
+            </div><!-- /.col -->
+
+
+            <div class="col-md-6">
+                <section class="section register inner-left-xs">
+                    <h2 class="bordered">Novo Cliente</h2>
+                    <p>Cadastre-se para fazer compras na loja</p>
+
+                    <form asp-route-returnUrl="@Model.ReturnUrl" role="form" class="register-form cf-style-1" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="field-row">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="le-input" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div><!-- /.field-row -->
+                        <div class="field-row">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="le-input" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="field-row">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="le-input" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="field-row">
+
+                        </div>
+
+
+                        <div class="buttons-holder">
+                            <button type="submit" class="le-button huge">Cadastrar</button>
+                        </div><!-- /.buttons-holder -->
+                    </form>
+                    <!--
+                        <h2 class="semi-bold">Sign up today and you'll be able to :</h2>
+
+                        <ul class="list-unstyled list-benefits">
+                            <li><i class="fa fa-check primary-color"></i> Speed your way through the checkout</li>
+                            <li><i class="fa fa-check primary-color"></i> Track your orders easily</li>
+                            <li><i class="fa fa-check primary-color"></i> Keep a record of all your purchases</li>
+                        </ul>
+                         /.register -->
+                </section>
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</main><!-- /.authentication -->

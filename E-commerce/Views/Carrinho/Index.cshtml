@@ -1,0 +1,198 @@
+﻿@model CarrinhoViewModel
+<div id="top-mega-nav">
+    <div class="container">
+        <nav>
+            <ul class="inline">
+                <li class="dropdown le-dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fa fa-shopping-cart"></i> Seu carrinho
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div><!-- /.container -->
+</div><!-- /#top-mega-nav -->
+<section id="cart-page">
+    <div class="container">
+        <!-- ========================================= CONTENT ========================================= -->
+        <div class="col-xs-12 col-md-8 items-holder no-margin">
+            @if (Model.ShoppingCart.CarrinhoItens.Count > 0)
+            {
+                @foreach (var item in Model.ShoppingCart.CarrinhoItens)
+                {
+                    <div class="row no-margin cart-item">
+                        <div class="col-xs-12 col-sm-2 no-margin">
+                            <a asp-controller="Produto" class="thumb-holder" asp-action="Detalhes" asp-route-id="@item.Produto.ProdutoId">
+                                <img class="lazy" alt="" src="~/imagens/produtos/@item.Produto.ImagemThumbnailUrl" />
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="title">
+                                <a asp-controller="Produto" asp-action="Detalhes" asp-route-id="@item.Produto.ProdutoId">@item.Produto.Nome</a>
+                            </div>
+                            <div class="brand">@item.Produto.Categoria</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 no-margin">
+                            <div class="price">
+                                @item.Produto.Preco.ToString("c")
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 no-margin">
+                            <div class="quantity">
+                                <form>
+                                    <a asp-controller="Carrinho" asp-action="RemoverItemCarrinho" asp-route-produtoId="@item.Produto.ProdutoId" alt="Remover" onclick="showModal();"><span style="font-size:25px;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></a>
+                                    <span style="font-size:35px; border-spacing:10px"> @item.Quantidade </span>
+                                    <a asp-controller="Carrinho" asp-action="AdicionarItemCarrinho" asp-route-produtoId="@item.Produto.ProdutoId" alt="Adicionar" onclick="showModal();"><span style="font-size:25px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 no-margin">
+                            <div class="price">
+                                @((item.Quantidade * item.Produto.Preco).ToString("c"))
+                            </div>
+                        </div>
+                    </div><!-- /.cart-item -->
+                }
+                <br />
+                <a asp-controller="Carrinho" asp-action="LimparCarrinho" class="btn btn-warning btn-lg">Limpar Carrinho</a> <a class="btn btn-default btn-lg" href="./">Continuar comprando</a>
+            }
+            else
+            {
+
+                <div class="container-fluid mt-100">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5></h5>
+                                </div>
+                                <div class="card-body cart">
+                                    <div class="col-sm-12 empty-cart-cls text-center">
+                                        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                                        <h3><strong>Seu carrinho de compras está vazio </strong></h3><br>
+                                        <a asp-controller="Home" asp-action="Index" class="le-button big">Voltar às compras</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <!-- ========================================= CONTENT : END ========================================= -->
+        <!-- ========================================= SIDEBAR ========================================= -->
+
+        <div class="col-xs-12 col-md-4 no-margin sidebar ">
+            <div class="widget cart-summary">
+                <h1 class="border">Compras</h1>
+                <div class="body">
+                    <ul id="total-price" class="tabled-data inverse-bold no-border">
+                        <li>
+                            <label>Valor Total</label>
+                            <div class="value pull-right">@Model.CarrinhoTotal.ToString("c")</div>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.widget -->
+
+            @if (Model.ShoppingCart.CarrinhoItens.Count > 0)
+            {
+                <div id="cupon-widget" class="widget">
+                    <div class="row">
+                        <div id="CalculoFrete">
+                            <partial name="_CalculoFrete" model="Model.Frete" />
+                        </div>
+                    </div>
+                </div><!-- /.widget -->
+            }
+            else
+            {
+                <h5>Carrinho de compras vazio!</h5>
+            }
+
+        </div><!-- /.sidebar -->
+        <!-- ========================================= SIDEBAR : END ========================================= -->
+    </div>
+</section>
+@section Scripts {
+    <script type="text/javascript">
+
+
+        function OpcaoEntrega() {
+
+            var value = $("input:radio[name=Radio-Entrega]:checked").val();
+            var total;
+
+            if (value == 'PAC') {
+                total = $('#LabelTotalPac').text()
+                
+            }
+
+            if (value == 'SEDEX') {
+                total = $('#LabelTotalSedex').text()
+            }
+
+            $('#LabelTotal').text(total)
+                  
+        }
+
+    function showModal() {
+            $('body').loadingModal({
+                position: 'auto',
+                text: '',
+                color: '#fff',
+                opacity: '0.7',
+                backgroundColor: 'rgb(0,0,0)',
+                animation: 'chasingDots'
+            });
+
+            var delay = function (ms) { return new Promise(function (r) { setTimeout(r, ms) }) };
+            var time = 2000;
+
+            delay(time)
+                .then(function () { $('body').loadingModal('animation', 'chasingDots').loadingModal('backgroundColor', 'black'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'rotatingPlane').loadingModal('backgroundColor', 'red'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'wave'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'wanderingCubes').loadingModal('backgroundColor', 'green'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'spinner'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'threeBounce'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'circle').loadingModal('backgroundColor', 'black'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'cubeGrid'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'fadingCircle').loadingModal('backgroundColor', 'gray'); return delay(time); })
+                .then(function () { $('body').loadingModal('animation', 'foldingCube'); return delay(time); })
+                .then(function () { $('body').loadingModal('color', 'black').loadingModal('text', 'Done :-)').loadingModal('backgroundColor', 'yellow'); return delay(time); })
+                .then(function () { $('body').loadingModal('hide'); return delay(time); })
+                .then(function () { $('body').loadingModal('destroy'); });
+        }
+
+        function CalcularFrete() {
+
+            var cepFrete = $('#cepFrete').val()
+
+            if (cepFrete == '') {    
+                alert("Favor Informar o CEP");
+
+        } else {
+            $.ajax({
+                url: '@Url.Action("CalcularFrete", "Carrinho")',
+                data: {
+                    CepDestino: cepFrete
+                },
+                type: 'GET',
+                cache: false,
+                async: true,
+                success: function (data) {  
+
+                    $("#CalculoFrete").html(data);
+                    document.getElementById("Form-entrega").style.display = 'block';                   
+                },
+
+            });         
+            
+        }
+
+      }
+
+    </script>
+}

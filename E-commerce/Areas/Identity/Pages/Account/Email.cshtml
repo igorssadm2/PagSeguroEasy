@@ -1,0 +1,41 @@
+﻿@page
+@model ChangeEmailModel
+<!DOCTYPE html>
+
+<div class="container">
+    <div class="col-md-9">
+        <div class="row">
+            <div>
+                <partial name="_MenuManager" />
+            </div>
+        </div>
+        <div class="row">  </div>
+        <div class="row col-lg-9">
+            <form method="post">
+                <div class="text-danger validation-summary-valid" data-valmsg-summary="true">
+                    <ul>
+                        <li style="display:none"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group col-lg-7">
+                    <label asp-for="Input.OldEmail"></label>
+                    <input asp-for="Input.OldEmail" class="le-input form-control-lg" />
+                    @*<button id="email-verification" type="submit" class="btn btn-link" formaction="/Identity/Account/Manage/Email?handler=SendVerificationEmail">Send verification email</button>*@
+                </div>
+                <div class="row">  </div>
+
+                <div class="form-group col-lg-7">
+                    <label asp-for="Input.NewEmail"></label>
+                    <input asp-for="Input.NewEmail" class="le-input form-control-lg" />
+                </div>
+                <div class="row"></div>
+                <div class="buttons-holder">
+                    <button type="submit" class="le-button huge">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
