@@ -1,7 +1,4 @@
-﻿using System;
-
-using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using System.Collections.Generic;
 
 namespace msShop.Models.DTO

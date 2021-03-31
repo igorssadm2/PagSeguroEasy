@@ -1,6 +1,4 @@
-﻿
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace PagSeguroEasy.Library.InputModels
 {

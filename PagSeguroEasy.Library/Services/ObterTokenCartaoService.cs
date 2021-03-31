@@ -1,4 +1,5 @@
-﻿using PagSeguroEasy.Library.Configurations;
+﻿using Microsoft.Extensions.Configuration;
+using PagSeguroEasy.Library.Configurations;
 using PagSeguroEasy.Library.InputModels;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,16 @@ namespace PagSeguroEasy.Library.Services
 {
     public class ObterTokenCartaoService : BaseService, IObterTokenCartaoService
     {
+        public ObterTokenCartaoService(IConfiguration configuration):base(configuration)
+        {
+
+        }
         public card ObterTokenCartao(ObterTokenCartaoInputModel obterTokenCartaoInput)
         {
             try
             {
                 card card = new card();
-                var URLBase = GlobalConfiguration.OBTERTOKENCARTAO;
+                var URLBase = _configuration.GetSection("OBTERTOKENCARTAO").Value;
                 var client = new HttpClient();
 
 

@@ -23,12 +23,14 @@ namespace msShop.Controllers
         private readonly IObterBandeiraCartaoService _obterBandeiraCartaoService;
         private readonly IObterCondicoesParcelamentoService _obterCondicoesParcelamentoService;
         private readonly IObterTokenCartaoService _obterTokenCartaoService;
+        private readonly IPagamentoCartaoDeCreditoService _pagamentoCartaoDeCreditoService;
+        
 
-        public PagamentoController(IConfiguration configuration, PagSeguroBLL pagSeguro, ShoppingCart shoppingCart,
+        public PagamentoController(IConfiguration configuration, PagSeguroBLL pagSeguro,
            SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,
            ICriarSessaoService criarSessaoService, IObterMeiosPagamentoService obterMeiosPagamentoService,
            IObterBandeiraCartaoService obterBandeiraCartaoService, IObterCondicoesParcelamentoService obterCondicoesParcelamentoService,
-           IObterTokenCartaoService obterTokenCartaoService) : base(configuration, signInManager, userManager)
+           IObterTokenCartaoService obterTokenCartaoService,IPagamentoCartaoDeCreditoService pagamentoCartaoDeCreditoService) : base(configuration, signInManager, userManager)
         {
             _pagSeguroBLL = pagSeguro;
             _criarSessaoService = criarSessaoService;
@@ -36,6 +38,7 @@ namespace msShop.Controllers
             _obterBandeiraCartaoService = obterBandeiraCartaoService;
             _obterCondicoesParcelamentoService = obterCondicoesParcelamentoService;
             _obterTokenCartaoService = obterTokenCartaoService;
+            _pagamentoCartaoDeCreditoService = pagamentoCartaoDeCreditoService;
 
         }
 

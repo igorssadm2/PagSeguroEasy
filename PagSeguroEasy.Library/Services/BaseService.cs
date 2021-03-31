@@ -11,6 +11,12 @@ namespace PagSeguroEasy.Library.Services
     {
         protected readonly IConfiguration _configuration;
 
+        public BaseService(IConfiguration configuration)
+        {
+
+            _configuration = configuration;
+        }
+
         protected T Deserializer<T>(string xml)
         {
             T instance;
